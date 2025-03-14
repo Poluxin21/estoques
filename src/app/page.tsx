@@ -105,7 +105,6 @@ export default function Home() {
           </Link>
         </motion.div>
       </section>
-
       <section className="bg-gradient-to-l from-indigo-600 to-indigo-800 text-white py-60 min-h-screen flex items-center">
         <motion.div
           className="container mx-auto text-center"
