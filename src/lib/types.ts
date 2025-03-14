@@ -7,7 +7,7 @@ export interface User {
     email: string;
     role?: string;
     token?: string;
-    image?: Base64URLString;
+    image?: string;
   }
   
   // Tipos para produto em estoque

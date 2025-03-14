@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { User } from '@/lib/types';
 import Image from 'next/image';
@@ -12,29 +12,13 @@ interface HeaderProps {
 export default function Header({ user }: HeaderProps) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
-  const [notifications, setNotifications] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Função para buscar as notificações da API
-  const fetchNotifications = async () => {
-    try {
-      const response = await fetch('/api/notifications'); // Endpoint da API
-      if (!response.ok) {
-        throw new Error('Falha ao carregar notificações');
-      }
-      const data = await response.json();
-      setNotifications(data);
-      setLoading(false);
-    } catch (err) {
-      setError('Erro ao carregar notificações');
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNotifications();
-  }, []);
+  
+  // Mock data para notificações
+  const notifications = [
+    { id: 1, text: 'Estoque baixo para Produto A', time: 'Há 10 minutos', read: false },
+    { id: 2, text: 'Nova entrada registrada', time: 'Há 30 minutos', read: false },
+    { id: 3, text: 'Novo fornecedor cadastrado', time: 'Há 2 horas', read: true },
+  ];
 
   return (
     <header className="bg-white border-b border-gray-200">
@@ -63,7 +47,7 @@ export default function Header({ user }: HeaderProps) {
             <input
               type="text"
               placeholder="Buscar..."
-              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+               className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-md bg-white text-gray-800 placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-md transition duration-200"
             />
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg 
@@ -93,7 +77,6 @@ export default function Header({ user }: HeaderProps) {
                 if (isProfileOpen) setIsProfileOpen(false);
               }}
               className="relative p-1 text-gray-500 hover:text-gray-700 focus:outline-none"
-              aria-expanded={isNotificationsOpen ? 'true' : 'false'}
             >
               <svg 
                 className="h-6 w-6" 
@@ -115,25 +98,17 @@ export default function Header({ user }: HeaderProps) {
             </button>
 
             {isNotificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200 transition-all">
+              <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200">
                 <div className="px-4 py-2 border-b border-gray-200">
                   <h3 className="text-sm font-medium text-gray-700">Notificações</h3>
                 </div>
                 <div className="max-h-60 overflow-y-auto">
-                  {loading ? (
-                    <p className="px-4 py-2 text-sm text-gray-500">Carregando...</p>
-                  ) : error ? (
-                    <p className="px-4 py-2 text-sm text-red-500">{error}</p>
-                  ) : notifications.length > 0 ? (
+                  {notifications.length > 0 ? (
                     <ul>
                       {notifications.map((notification) => (
                         <li 
                           key={notification.id} 
                           className={`px-4 py-2 hover:bg-gray-50 ${!notification.read ? 'bg-blue-50' : ''}`}
-                          onClick={() => {
-                            notification.read = true;
-                            setIsNotificationsOpen(false); // Fecha a notificação ao clicar
-                          }}
                         >
                           <p className="text-sm text-gray-800">{notification.text}</p>
                           <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
@@ -146,7 +121,7 @@ export default function Header({ user }: HeaderProps) {
                 </div>
                 <div className="px-4 py-2 border-t border-gray-200">
                   <Link 
-                    href="/notify" 
+                    href="/dashboard/notificacoes" 
                     className="text-xs text-indigo-600 hover:text-indigo-800"
                   >
                     Ver todas
@@ -164,7 +139,6 @@ export default function Header({ user }: HeaderProps) {
                 if (isNotificationsOpen) setIsNotificationsOpen(false);
               }}
               className="flex items-center text-sm focus:outline-none"
-              aria-expanded={isProfileOpen ? 'true' : 'false'}
             >
               <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
                 {user.image ? (
@@ -219,7 +193,7 @@ export default function Header({ user }: HeaderProps) {
                 <button 
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => {
-                    // Implementar logout aqui
+                    // Esta função já está implementada no Sidebar
                   }}
                 >
                   Sair
