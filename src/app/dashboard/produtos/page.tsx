@@ -6,12 +6,14 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/components/dashboard/SideBar";
 import Header from "@/components/dashboard/Header";
 import { Product, User } from "@/lib/types";
+import Popup from "@/components/dashboard/Popup"; // Importando o componente Popup
 
 export default function Produtos() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [produtos, setProdutos] = useState<Product[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -22,7 +24,6 @@ export default function Produtos() {
   }, [status, router]);
 
   useEffect(() => {
-    // Simulação de requisição de dados (com base no tipo de produto atualizado)
     setProdutos([
       {
         id: "1",
@@ -69,6 +70,11 @@ export default function Produtos() {
     ]);
   }, []);
 
+  const handleAddProduct = () => {
+    console.log("Produto adicionado!");
+    setIsModalOpen(false);
+  };
+
   if (isLoading) {
     return (
       <div className="flex h-screen w-full items-center justify-center bg-gray-50">
@@ -86,9 +92,22 @@ export default function Produtos() {
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl font-semibold text-gray-900 mb-6">Produtos</h1>
+            
+            <div className="mb-4">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+              >
+                Adicionar Produto
+              </button>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {produtos.map((produto) => (
-                <div key={produto.id} className="bg-white rounded-lg shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
+                <div
+                  key={produto.id}
+                  className="bg-white rounded-lg shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300"
+                >
                   <div className="flex flex-col">
                     <h2 className="text-xl font-semibold text-gray-800">{produto.name}</h2>
                     <p className="text-sm text-gray-500">SKU: {produto.sku}</p>
@@ -112,6 +131,56 @@ export default function Produtos() {
           </div>
         </main>
       </div>
+    <Popup isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">Adicionar Produto</h2>
+      <form onSubmit={handleAddProduct}>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nome</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="mt-1 px-3 py-2 w-full border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="price" className="block text-sm font-medium text-gray-700">Preço</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            className="mt-1 px-3 py-2 w-full border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="sku" className="block text-sm font-medium text-gray-700">SKU</label>
+          <input
+            type="text"
+            id="sku"
+            name="sku"
+            className="mt-1 px-3 py-2 w-full border border-gray-300 rounded-md"
+            required
+          />
+        </div>
+        <div className="flex justify-end gap-4">
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(false)}
+            className="px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500"
+          >
+            Cancelar
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+          >
+            Adicionar
+          </button>
+        </div>
+      </form>
+    </Popup>
     </div>
   );
 }

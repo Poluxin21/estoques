@@ -1,6 +1,4 @@
 // src/lib/types.ts
-
-// Tipos para usuário autenticado
 export interface User {
     id: string;
     name?: string;
@@ -10,7 +8,6 @@ export interface User {
     image?: string;
   }
   
-  // Tipos para produto em estoque
   export interface Product {
     id: string;
     name: string;
@@ -27,7 +24,6 @@ export interface User {
     updatedAt: Date;
   }
   
-  // Tipos para fornecedor
   export interface Supplier {
     id: string;
     name: string;
@@ -39,7 +35,6 @@ export interface User {
     notes?: string;
   }
   
-  // Tipos para entrada de estoque
   export interface StockEntry {
     id: string;
     productId: string;
@@ -54,7 +49,6 @@ export interface User {
     createdBy: string;
   }
   
-  // Tipos para saída de estoque
   export interface StockOut {
     id: string;
     productId: string;
@@ -66,7 +60,6 @@ export interface User {
     createdBy: string;
   }
   
-  // Tipos para atividade recente
   export interface Activity {
     id: string;
     type: 'entry' | 'out' | 'update' | 'create' | 'delete' | 'login';
@@ -78,8 +71,6 @@ export interface User {
     userId: string;
     userName: string;
   }
-  
-  // Tipos para estatísticas do dashboard
   export interface DashboardStats {
     totalProducts: number;
     totalSuppliers: number;
