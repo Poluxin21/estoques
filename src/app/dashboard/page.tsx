@@ -70,7 +70,6 @@ interface LowStockItem {
 }
 
 function LowStockList() {
-  // Esta seria uma requisição real para a sua API
   const [lowStock, setLowStock] = useState<LowStockItem[]>([
     { id: '1', name: 'Produto A', currentStock: 5, minStock: 10 },
     { id: '2', name: 'Produto B', currentStock: 3, minStock: 15 },

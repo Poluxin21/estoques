@@ -16,7 +16,7 @@ export default function Popup({ isOpen, onClose, children }: PopupProps) {
       className={`fixed inset-0 flex justify-center items-center z-50 backdrop-blur-sm transition-all duration-300 ease-in-out ${
         isOpen ? "opacity-100" : "opacity-0"
       }`}
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }} // Ajuste da cor de fundo para leve transparência
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
     >
       <div className="bg-white p-8 rounded-lg shadow-xl w-1/3 relative transition-transform transform">
         <button

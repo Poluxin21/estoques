@@ -1,8 +1,7 @@
-// app/layout.tsx
-"use client"; // Certifique-se de que o código é executado no lado do cliente
+"use client";
 
 import { SessionProvider } from "next-auth/react";
-import "../styles/globals.css"; // Importe seus estilos globais
+import "../styles/globals.css";
 
 export default function RootLayout({
   children,
@@ -12,7 +11,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* Envolvendo a aplicação inteira com o SessionProvider */}
         <SessionProvider>{children}</SessionProvider>
       </body>
     </html>

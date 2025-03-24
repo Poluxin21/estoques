@@ -1,5 +1,3 @@
-// pages/configuracoes.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -13,22 +11,18 @@ export default function Configuracoes() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Verifica se o usuário está autenticado
   if (status === "unauthenticated") {
     router.push("/auth/login");
-    return null; // Redireciona para a página de login se o usuário não estiver autenticado
+    return null;
   }
 
   const user = session?.user as User;
 
-  // Estado para armazenar as novas informações
   const [newName, setNewName] = useState(user?.name || "");
   const [newEmail, setNewEmail] = useState(user?.email || "");
 
   const handleSaveChanges = async () => {
-    // Aqui, você faria uma chamada para atualizar as configurações no back-end (e.g., API ou banco de dados)
     console.log("Configurações atualizadas", { newName, newEmail });
-    // Suponha que a atualização foi bem-sucedida
     alert("Configurações atualizadas com sucesso!");
   };
 

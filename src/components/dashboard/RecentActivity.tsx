@@ -71,7 +71,6 @@ export default function RecentActivity() {
   return (
     <div className="overflow-hidden">
       {loading ? (
-        // Estado de carregamento
         <div className="space-y-4">
           {[...Array(4)].map((_, index) => (
             <div key={index} className="flex items-start animate-pulse">
@@ -84,7 +83,6 @@ export default function RecentActivity() {
           ))}
         </div>
       ) : (
-        // Lista de atividades
         <div className="flow-root">
           <ul className="-mb-8">
             {activities.map((activity, activityIdx) => {

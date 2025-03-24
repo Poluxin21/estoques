@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/dashboard/SideBar";
 import Header from "@/components/dashboard/Header";
-import { Supplier } from "@/lib/types"; // Tipo de Fornecedor
-import { User } from "@/lib/types"; // Tipo de Usuário
+import { Supplier } from "@/lib/types";
+import { User } from "@/lib/types";
 
 export default function SuppliersPage() {
   const { data: session, status } = useSession();
@@ -19,7 +19,6 @@ export default function SuppliersPage() {
       router.push("/auth/login");
     } else if (status === "authenticated") {
       setIsLoading(false);
-      // Aqui você pode fazer a requisição para pegar os fornecedores da API
       setSuppliers([
         {
           id: "1",
@@ -31,7 +30,6 @@ export default function SuppliersPage() {
           cnpj: "12.345.678/0001-90",
           notes: "Entrega sempre pontual",
         },
-        // Adicionar outros fornecedores aqui
       ]);
     }
   }, [status, router]);

@@ -12,13 +12,11 @@ export default function Perfil() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Verifica se o usuário está autenticado
   if (status === "unauthenticated") {
     router.push("/auth/login");
-    return null; // Redireciona para a página de login se o usuário não estiver autenticado
+    return null;
   }
 
-  // Dados do usuário autenticado
   const user = session?.user as User;
 
   return (

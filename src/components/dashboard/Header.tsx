@@ -13,7 +13,6 @@ export default function Header({ user }: HeaderProps) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   
-  // Mock data para notificações
   const notifications = [
     { id: 1, text: 'Estoque baixo para Produto A', time: 'Há 10 minutos', read: false },
     { id: 2, text: 'Nova entrada registrada', time: 'Há 30 minutos', read: false },
@@ -69,7 +68,6 @@ export default function Header({ user }: HeaderProps) {
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Notificações */}
           <div className="relative">
             <button 
               onClick={() => {
@@ -131,7 +129,6 @@ export default function Header({ user }: HeaderProps) {
             )}
           </div>
 
-          {/* Perfil do usuário */}
           <div className="relative">
             <button 
               onClick={() => {
@@ -193,7 +190,6 @@ export default function Header({ user }: HeaderProps) {
                 <button 
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => {
-                    // Esta função já está implementada no Sidebar
                   }}
                 >
                   Sair

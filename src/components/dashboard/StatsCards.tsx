@@ -20,13 +20,11 @@ export default function StatsCards() {
   });
 
   useEffect(() => {
-    // Simula uma chamada de API
     const fetchStats = async () => {
       try {
         const response = await fetch('https://api.atlas.estoques.dev/api/v1/gerenciamento');
         const data = await response.json();
         
-        // Aqui você ajusta os dados conforme o formato da resposta da API
         const products = data.products || { count: 0, change: 0 };
         const lowStock = data.lowStock || { count: 0, change: 0 };
         const inflow = data.inflow || { value: 0, change: 0 };

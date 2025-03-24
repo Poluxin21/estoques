@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/components/dashboard/SideBar";
 import Header from "@/components/dashboard/Header";
 import { Product, User } from "@/lib/types";
-import Popup from "@/components/dashboard/Popup"; // Importando o componente Popup
+import Popup from "@/components/dashboard/Popup";
 
 export default function Produtos() {
   const { data: session, status } = useSession();

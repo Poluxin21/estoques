@@ -27,7 +27,6 @@ export default function CreateSupplierPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você faria a requisição para criar o fornecedor
     console.log("Criando fornecedor:", formData);
     router.push("/suppliers");
   };

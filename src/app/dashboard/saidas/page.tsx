@@ -5,8 +5,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/dashboard/SideBar";
 import Header from "@/components/dashboard/Header";
-import { StockOut } from "@/lib/types"; // Importando os tipos
-import { User } from "@/lib/types"; // Supondo que você tenha esse tipo definido
+import { StockOut } from "@/lib/types";
+import { User } from "@/lib/types";
 
 export default function StockOutPage() {
   const { data: session, status } = useSession();
@@ -21,7 +21,6 @@ export default function StockOutPage() {
     }
   }, [status, router]);
 
-  // Dados mockados de saída de estoque
   const stockOuts: StockOut[] = [
     {
       id: "1",
@@ -33,7 +32,6 @@ export default function StockOutPage() {
       date: new Date(),
       createdBy: "admin",
     },
-    // ...outros dados
   ];
 
   if (isLoading) {
