@@ -11,21 +11,18 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Usuário de teste para simular a autenticação
         const testUser = {
-          id: "1", // Adicionando o campo id
+          id: "1",
           email: "a@gmail.com",
           password: "123",
           name: "Test User",
           role: "admin"
         };
 
-        // Verifique se as credenciais fornecidas correspondem ao usuário de teste
         if (credentials?.email === testUser.email && credentials?.password === testUser.password) {
-          return testUser; // Retorna o usuário simulado com o campo id
+          return testUser;
         }
 
-        // Se não coincidir, retorna null
         return null;
       }
     })
